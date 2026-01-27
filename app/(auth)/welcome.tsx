@@ -14,54 +14,50 @@ export default function WelcomeScreen() {
   const shineAnim = useRef(new Animated.Value(0.4)).current 
 
   useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 1500,
-      useNativeDriver: true,
-    }).start()
+  Animated.timing(fadeAnim, {
+    toValue: 1,
+    duration: 1500,
+    useNativeDriver: true,
+  }).start()
 
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(hoverAnim, {
-          toValue: -15,
-          duration: 2000,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-        Animated.timing(hoverAnim, {
-          toValue: 0, 
-          duration: 2000,
-          easing: Easing.inOut(Easing.ease),
-          useNativeDriver: true,
-        }),
-      ])
-    ).start()
+  Animated.loop(
+    Animated.sequence([
+      Animated.timing(hoverAnim, {
+        toValue: -15,
+        duration: 2000,
+        easing: Easing.inOut(Easing.ease),
+        useNativeDriver: true,
+      }),
+      Animated.timing(hoverAnim, {
+        toValue: 0,
+        duration: 2000,
+        easing: Easing.inOut(Easing.ease),
+        useNativeDriver: true,
+      }),
+    ])
+  ).start()
 
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(shineAnim, {
-          toValue: 1,
-          duration: 1500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(shineAnim, {
-          toValue: 0.4,
-          duration: 1500,
-          useNativeDriver: true,
-        }),
-      ])
-    ).start()
+  Animated.loop(
+    Animated.sequence([
+      Animated.timing(shineAnim, {
+        toValue: 1,
+        duration: 1500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(shineAnim, {
+        toValue: 0.4,
+        duration: 1500,
+        useNativeDriver: true,
+      }),
+    ])
+  ).start()
 
-    const timer = setTimeout(() => {
-      if (user) {
-        router.replace('/(dashboard)/home') 
-      } else {
-        router.replace('/(auth)/login') 
-      }
-    }, 3000)
+  const timer = setTimeout(() => {
+    router.replace('/(auth)/onboarding')
+  }, 4000)
 
-    return () => clearTimeout(timer)
-  }, [user, router])
+  return () => clearTimeout(timer)
+}, [])
 
   return (
     <View className="flex-1 justify-center items-center bg-[#5D603E]">
