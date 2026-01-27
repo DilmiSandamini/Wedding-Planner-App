@@ -58,7 +58,7 @@ export default function WelcomeScreen() {
       } else {
         router.replace('/(auth)/login') 
       }
-    }, 8000)
+    }, 3000)
 
     return () => clearTimeout(timer)
   }, [user, router])

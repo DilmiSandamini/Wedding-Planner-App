@@ -26,10 +26,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-    showLoader()
+    // showLoader()
     const unsubscribe = onAuthStateChanged(auth, usr => {
       setUser(usr)
-      hideLoader()
+      // hideLoader()
     })
     return () => unsubscribe()
   }, [])
