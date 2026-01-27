@@ -145,5 +145,6 @@ export default function Onboarding() {
         </View>
       </View>
     </ImageBackground>
+    
   )
 }
