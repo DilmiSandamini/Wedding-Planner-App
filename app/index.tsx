@@ -1,12 +1,17 @@
-import "../global.css"
-import { Text, View } from "react-native";
- 
-export default function App() {
-  return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-xl font-bold text-blue-500">
-        Welcome to Nativewind!
-      </Text>
-    </View>
-  );
+import { useAuth } from '@/hooks/useAuth'
+import { Redirect } from 'expo-router'
+import { View, ActivityIndicator } from 'react-native'
+
+export default function Index () {
+  const { user, loading } = useAuth()
+
+  if (loading) {
+    return (
+      <View className='flex-1 justify-center items-center bg-gray-50'>
+        <ActivityIndicator size='large' color='#4ade80' />
+      </View>
+    )
+  }
+
+  return <Redirect href='/(auth)/welcome' />
 }
