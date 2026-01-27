@@ -9,7 +9,7 @@ import { LoaderProvider } from '@/context/LoaderContext'
 
 export default function RootLayout () {
   return (
-    <LoaderProvider>
+    // <LoaderProvider>
       <AuthProvider>
         <SafeAreaView className='flex-1 bg-gray-50'>
           <StatusBar style='dark' />
@@ -17,6 +17,6 @@ export default function RootLayout () {
         </SafeAreaView>
         <Toast />
       </AuthProvider>
-    </LoaderProvider>
+    // </LoaderProvider>
   )
 }
