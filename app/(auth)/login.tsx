@@ -36,7 +36,7 @@ export default function Login () {
     // showLoader()
     try {
       await login(email, password)
-      router.replace('/(dashboard)/weddingdetails')
+      router.replace('/(auth)/weddingdetails')
     } catch (err: any) {
       showToast('error', 'Login Error', err.message)
     } finally {
