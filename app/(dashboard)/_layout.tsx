@@ -8,7 +8,7 @@ export default function DashboardLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#5D603E',
+        tabBarActiveTintColor: '#8B4555',
         tabBarInactiveTintColor: '#9CA3AF',
         tabBarLabelStyle: {
           fontSize: 10,
@@ -24,7 +24,7 @@ export default function DashboardLayout() {
           position: 'absolute',
           borderTopWidth: 0,
           elevation: 25,
-          shadowColor: '#000',
+          shadowColor: '#8B4555',
           shadowOpacity: 0.1,
           shadowRadius: 10,
         },
