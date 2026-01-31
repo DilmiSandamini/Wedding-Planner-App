@@ -1,39 +1,68 @@
 import { Pressable, View, Text, ActivityIndicator } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import { Ionicons } from '@expo/vector-icons'
 
-interface GlassButtonProps {
+interface RomanticButtonProps {
   title: string
   onPress: () => void
-  className?: string
   loading?: boolean
-  bgColor?: string
+  icon?: any
 }
 
-export default function GlassButton ({
+export default function RomanticButton({
   title,
   onPress,
   loading = false,
-  className = '',
-  bgColor = 'bg-black/30'
-}: GlassButtonProps) {
+  icon
+}: RomanticButtonProps) {
   return (
     <Pressable
       onPress={onPress}
       disabled={loading}
       style={({ pressed }) => ({
-        transform: [{ scale: pressed ? 0.97 : 1 }],
-        opacity: pressed ? 0.9 : 1
+        transform: [{ scale: pressed ? 0.98 : 1 }],
+        opacity: pressed ? 0.9 : 1,
+        shadowColor: '#FF69B4',
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.3,
+        shadowRadius: 12,
+        elevation: 5
       })}
-      className={className}
     >
-      <View className={`rounded-2xl ${bgColor} backdrop-blur-md px-6 py-3 border border-white/20`}>
-        {loading ? (
-          <ActivityIndicator size='small' color='#fff' />
-        ) : (
-          <Text className='text-white text-center font-semibold text-lg'>
-            {title}
-          </Text>
-        )}
-      </View>
+      <LinearGradient
+        colors={['#FFB6C1', '#FF69B4', '#FF1493']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        className="rounded-2xl py-4"
+      >
+        <View className="flex-row items-center justify-center">
+          {loading ? (
+            <ActivityIndicator size="small" color="#FFFFFF" />
+          ) : (
+            <>
+              <Text
+                style={{
+                  fontFamily: 'System',
+                  fontSize: 16,
+                  fontWeight: '600',
+                  color: '#FFFFFF',
+                  letterSpacing: 1.5
+                }}
+              >
+                {title}
+              </Text>
+              {icon && (
+                <Ionicons 
+                  name={icon} 
+                  size={20} 
+                  color="#FFFFFF" 
+                  style={{ marginLeft: 8 }}
+                />
+              )}
+            </>
+          )}
+        </View>
+      </LinearGradient>
     </Pressable>
   )
 }
