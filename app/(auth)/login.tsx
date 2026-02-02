@@ -18,6 +18,8 @@ import { useLoader } from '@/hooks/useLoader'
 import { showToast } from '@/utils/notifications'
 import { useAuth } from '@/hooks/useAuth'
 import { Ionicons } from '@expo/vector-icons'
+import { doc, getDoc } from 'firebase/firestore'
+import { db, auth } from '@/services/firebaseConfig'
 
 export default function Login() {
   const router = useRouter()
@@ -67,7 +69,7 @@ export default function Login() {
   }, [])
 
   const handleLogin = async () => {
-    if (!email || !password) {
+    if (!email.trim() || !password) {
       return showToast(
         'error',
         'Validation Error',
@@ -77,7 +79,20 @@ export default function Login() {
 
     try {
       await login(email, password)
-      router.replace('/(auth)/weddingdetails')
+      
+      const currentUser = auth.currentUser;
+
+      if (currentUser) {
+        const docRef = doc(db, "wedding_plans", currentUser.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          router.replace('/(dashboard)/home')
+        } else {
+          router.replace('/(auth)/weddingdetails')
+        }
+      }
+      
     } catch (err: any) {
       showToast('error', 'Login Error', err.message)
     }
