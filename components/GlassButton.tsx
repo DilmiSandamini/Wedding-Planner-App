@@ -2,19 +2,19 @@ import { Pressable, View, Text, ActivityIndicator } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons } from '@expo/vector-icons'
 
-interface RomanticButtonProps {
+interface ButtonProps {
   title: string
   onPress: () => void
   loading?: boolean
   icon?: any
 }
 
-export default function RomanticButton({
+export default function GlassButton({
   title,
   onPress,
   loading = false,
   icon
-}: RomanticButtonProps) {
+}: ButtonProps) {
   return (
     <Pressable
       onPress={onPress}

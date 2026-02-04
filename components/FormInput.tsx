@@ -1,7 +1,7 @@
 import { View, Text, TextInput } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
-interface RomanticFormInputProps {
+interface FormInputProps {
   label: string
   placeholder: string
   value: string
@@ -10,14 +10,14 @@ interface RomanticFormInputProps {
   icon?: any
 }
 
-export default function RomanticFormInput({ 
+export default function FormInput({ 
   label, 
   placeholder, 
   value, 
   onChangeText, 
   keyboardType = 'default',
   icon 
-}: RomanticFormInputProps) {
+}: FormInputProps) {
   return (
     <View className="mb-5">
       <Text
@@ -33,7 +33,7 @@ export default function RomanticFormInput({
         {label}
       </Text>
       <View
-        className="rounded-2xl flex-row items-center px-4 py-3"
+        className="rounded-2xl flex-row items-center px-4 py-1"
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.9)',
           borderWidth: 1.5,

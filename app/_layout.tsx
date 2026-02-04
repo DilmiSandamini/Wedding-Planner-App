@@ -17,6 +17,6 @@ export default function RootLayout () {
         </SafeAreaView>
         <Toast />
       </AuthProvider>
-    // </LoaderProvider>
+    //  </LoaderProvider>
   )
 }

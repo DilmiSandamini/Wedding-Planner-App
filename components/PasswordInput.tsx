@@ -1,34 +1,61 @@
 import { useState } from 'react'
-import { View, TextInput, TouchableOpacity } from 'react-native'
-import { Ionicons } from '@expo/vector-icons' // or any icon library
+import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 
-export default function PasswordInput ({
-  password,
-  setPassword,
-  placeholder
-}: {
+interface PasswordInputProps {
+  label: string
   password: string
   setPassword: (text: string) => void
   placeholder?: string
-}) {
-  const [secure, setSecure] = useState(true)
+}
+
+export default function PasswordInput({ label, password, setPassword, placeholder }: PasswordInputProps) {
+  const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <View className='relative w-full mb-6'>
-      <TextInput
-        placeholder={placeholder ? placeholder : 'Password'}
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry={secure}
-        placeholderTextColor='#6B7280'
-        className='border border-gray-300 p-3 rounded-xl bg-white/70 pr-12'
-      />
-      <TouchableOpacity
-        onPress={() => setSecure(!secure)}
-        className='absolute right-3 top-3'
+    <View className="mb-6">
+      <Text
+        style={{
+          fontFamily: 'System',
+          fontSize: 13,
+          fontWeight: '500',
+          color: '#8B4555',
+          marginBottom: 8,
+          letterSpacing: 0.5
+        }}
       >
-        <Ionicons name={secure ? 'eye-off' : 'eye'} size={24} color='#6B7280' />
-      </TouchableOpacity>
+        {label}
+      </Text>
+      <View
+        className="rounded-2xl flex-row items-center px-4 py-1"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          borderWidth: 1.5,
+          borderColor: '#FFD4D4'
+        }}
+      >
+        <Ionicons name="lock-closed-outline" size={20} color="#B76E79" style={{ marginRight: 12 }} />
+        <TextInput
+          placeholder={placeholder || 'Enter your password'}
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword}
+          placeholderTextColor="#D4A5A5"
+          className="flex-1"
+          style={{
+            fontFamily: 'System',
+            fontSize: 15,
+            color: '#8B4555'
+          }}
+        />
+        <TouchableOpacity onPress={() => setShowPassword(!showPassword)} className="p-1">
+           <Ionicons 
+             name={showPassword ? 'eye-outline' : 'eye-off-outline'} 
+             size={20} 
+             color="#B76E79" 
+           />
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
