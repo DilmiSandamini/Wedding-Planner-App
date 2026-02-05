@@ -17,6 +17,7 @@ import { Ionicons } from '@expo/vector-icons'
 import FormInput from '@/components/FormInput'
 import SelectInput from '@/components/SelectInput'
 import GlassButton from '@/components/GlassButton'
+import BudgetModal from '@/components/BudgetModal'
 
 const BUDGET_OPTIONS = [
   { label: "Under 1.5M", value: "Under 1.5M", icon: "💝" },
@@ -212,11 +213,11 @@ export default function WeddingDetails() {
             />
 
             {/* Using SelectInput for Budget */}
-            <SelectInput
-              label="Budget Range"
-              value={budget || 'Select your budget'}
-              onPress={() => setShowBudgetModal(true)}
-              icon="wallet-outline"
+            <BudgetModal
+              visible={showBudgetModal}
+              selectedBudget={budget}
+              onSelect={handleBudgetSelect}
+              onClose={() => setShowBudgetModal(false)}
             />
 
             <FormInput
@@ -430,104 +431,7 @@ interface BudgetModalProps {
   onClose: () => void
 }
 
-const BudgetModal = ({ visible, selectedBudget, onSelect, onClose }: BudgetModalProps) => (
-  <Modal visible={visible} transparent animationType="slide">
-    <TouchableOpacity 
-      activeOpacity={1}
-      onPress={onClose}
-      className="flex-1 justify-end"
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-    >
-      <TouchableOpacity activeOpacity={1}>
-        <View
-          className="rounded-t-[40px] p-6 pb-10"
-          style={{ backgroundColor: '#FFF5F5' }}
-        >
-          <View className="items-center mb-6">
-            <View className="w-12 h-1 rounded-full mb-4" style={{ backgroundColor: '#FFD4D4' }} />
-            <Text
-              style={{
-                fontFamily: 'System',
-                fontSize: 22,
-                fontWeight: '300',
-                color: '#8B4555',
-                letterSpacing: 1
-              }}
-            >
-              Select Budget Range
-            </Text>
-            <View className="flex-row items-center mt-3">
-              <View className="w-6 h-[1px]" style={{ backgroundColor: '#FF69B4' }} />
-              <Ionicons name="diamond" size={8} color="#FF69B4" style={{ marginHorizontal: 6 }} />
-              <View className="w-6 h-[1px]" style={{ backgroundColor: '#FF69B4' }} />
-            </View>
-          </View>
 
-          {BUDGET_OPTIONS.map((option) => (
-            <TouchableOpacity 
-              key={option.value}
-              className="mb-3"
-              onPress={() => onSelect(option.value)}
-            >
-              <View
-                className="rounded-2xl p-4 flex-row items-center justify-between"
-                style={{
-                  backgroundColor: selectedBudget === option.value 
-                    ? 'rgba(255, 105, 180, 0.15)' 
-                    : 'rgba(255, 255, 255, 0.8)',
-                  borderWidth: 1.5,
-                  borderColor: selectedBudget === option.value ? '#FF69B4' : '#FFD4D4'
-                }}
-              >
-                <View className="flex-row items-center flex-1">
-                  <Text style={{ fontSize: 24, marginRight: 12 }}>{option.icon}</Text>
-                  <Text
-                    style={{
-                      fontFamily: 'System',
-                      fontSize: 16,
-                      fontWeight: selectedBudget === option.value ? '600' : '400',
-                      color: selectedBudget === option.value ? '#FF1493' : '#8B4555',
-                      letterSpacing: 0.3
-                    }}
-                  >
-                    {option.label}
-                  </Text>
-                </View>
-                {selectedBudget === option.value && (
-                  <Ionicons name="checkmark-circle" size={24} color="#FF1493" />
-                )}
-              </View>
-            </TouchableOpacity>
-          ))}
-
-          <TouchableOpacity onPress={onClose} className="mt-4">
-            <View
-              className="rounded-2xl py-3"
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                borderWidth: 1.5,
-                borderColor: '#FFD4D4'
-              }}
-            >
-              <Text
-                className="text-center"
-                style={{
-                  fontFamily: 'System',
-                  fontSize: 15,
-                  fontWeight: '500',
-                  color: '#B76E79',
-                  letterSpacing: 0.5
-                }}
-              >
-                Cancel
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </TouchableOpacity>
-    </TouchableOpacity>
-  </Modal>
-)
 
 const CornerDecorations = () => (
   <>
