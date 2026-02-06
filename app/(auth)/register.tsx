@@ -27,7 +27,7 @@ import GlassButton from '@/components/GlassButton'
 
 export default function Register() {
   const router = useRouter()
-  const { isLoading } = useLoader()
+  const { showLoader, hideLoader, isLoading } = useLoader()
 
   // Form State
   const [fullName, setFullName] = useState('')

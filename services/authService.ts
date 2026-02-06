@@ -1,43 +1,39 @@
-import { auth, db } from "./firebaseConfig"
 import {
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  updateProfile,
+  signInWithEmailAndPassword,
   signOut,
-  User
+  updateProfile
 } from "firebase/auth"
-import { doc, setDoc, updateDoc } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore"
+import { auth, db } from "./firebaseConfig"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
-export const loginUser = async (email: string, password: string) => {
-  return signInWithEmailAndPassword(auth, email, password)
+export const login = async (email: string, password: string) => {
+  return await signInWithEmailAndPassword(auth, email, password)
+}
+
+export const logout = async () => {
+  await signOut(auth)
+  AsyncStorage.clear()
+  return
 }
 
 export const registerUser = async (
-  fullName: string,
+  name: string,
   email: string,
   password: string
 ) => {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  )
-  await updateProfile(userCredential.user, { displayName: fullName })
-  await setDoc(doc(db, "users", userCredential.user.uid), {
-    fullName,
+  const userCred = await createUserWithEmailAndPassword(auth, email, password)
+  await updateProfile(userCred.user, {
+    displayName: name,
+    photoURL: ""
+  })
+
+  setDoc(doc(db, "users", userCred.user.uid), {
+    name,
+    role: "",
     email,
     createdAt: new Date()
   })
-  return userCredential.user
-}
-
-export const logoutUser = async () => {
-  return signOut(auth)
-}
-
-export const updateUserProfile = async (user: User, displayName: string) => {
-  await updateProfile(user, { displayName })
-
-  const userRef = doc(db, "users", user.uid)
-  await updateDoc(userRef, { fullName: displayName })
+  return userCred.user
 }

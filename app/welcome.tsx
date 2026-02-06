@@ -160,7 +160,7 @@ export default function WelcomeScreen() {
 
     // Navigate to onboarding
     const timer = setTimeout(() => {
-      router.replace('/(auth)/onboarding')
+      router.replace('/onboarding')
     }, 4500)
 
     return () => clearTimeout(timer)

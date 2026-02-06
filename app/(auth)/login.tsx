@@ -10,31 +10,28 @@ import {
   Platform,
   ScrollView
 } from 'react-native'
-import { useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Ionicons } from '@expo/vector-icons'
 import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '@/services/firebaseConfig'
-
-// Custom Hooks and Utilities
-import { useLoader } from '@/hooks/useLoader'
+import { useRouter } from "expo-router"
+import { useLoader } from "@/hooks/useLoader"
+import { login } from "@/services/authService"
 import { showToast } from '@/utils/notifications'
-import { useAuth } from '@/hooks/useAuth'
-
 // Reusable Components
 import FormInput from '@/components/FormInput'
 import PasswordInput from '@/components/PasswordInput'
 import GlassButton from '@/components/GlassButton'
 
 export default function Login() {
-  const router = useRouter()
-  const { login } = useAuth()
-  const { isLoading } = useLoader()
   
   // Form State
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const { showLoader, hideLoader, isLoading } = useLoader()
+  const router = useRouter()
 
   // Animations
   const fadeAnim = useRef(new Animated.Value(0)).current
