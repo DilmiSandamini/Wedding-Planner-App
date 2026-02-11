@@ -20,9 +20,12 @@ export default function Index() {
 
       try {
         const plan = await getWeddingPlan(user.uid)
+        
         if (plan && plan.isSetupComplete) {
+          console.log("User has a plan, redirecting to Dashboard")
           setHasDetails(true)
         } else {
+          console.log("User has NO plan, redirecting to Details Form")
           setHasDetails(false)
         }
       } catch (error) {
@@ -40,20 +43,21 @@ export default function Index() {
     return (
       <View 
         className='flex-1 justify-center items-center bg-[#FFF5F5]'
-        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} // මැදට ගන්න බව සහතික කිරීමට
+        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
       >
         <ActivityIndicator size='large' color='#FF69B4' />
       </View>
     )
   }
 
+
   if (!user) {
-    return <Redirect href='/(auth)/weddingdetails' />
+    return <Redirect href='/welcome' />
   }
 
-  if (!hasDetails) {
-    return <Redirect href='/(auth)/weddingdetails' />
+  if (hasDetails) {
+    return <Redirect href='/(dashboard)/home' />
   }
 
-  return <Redirect href='/(dashboard)/home' />
+  return <Redirect href='/(auth)/weddingdetails' />
 }

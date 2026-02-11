@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { 
   View, Text, ScrollView, KeyboardAvoidingView, Platform, 
-  Modal, TouchableOpacity, Animated
+  Animated
 } from 'react-native'
 import { useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
@@ -18,13 +18,6 @@ import FormInput from '@/components/FormInput'
 import SelectInput from '@/components/SelectInput'
 import GlassButton from '@/components/GlassButton'
 import BudgetModal from '@/components/BudgetModal'
-
-const BUDGET_OPTIONS = [
-  { label: "Under 1.5M", value: "Under 1.5M", icon: "💝" },
-  { label: "1.5M - 3M", value: "1.5M - 3M", icon: "💍" },
-  { label: "3M - 5M", value: "3M - 5M", icon: "💎" },
-  { label: "Above 5M", value: "Above 5M", icon: "👑" }
-]
 
 export default function WeddingDetails() {
   const { user } = useAuth()
@@ -94,37 +87,48 @@ export default function WeddingDetails() {
   }
 
   const handleSave = async () => {
-  // Validation
-  if (!planName.trim() || !coupleName.trim() || !budget || !guests || !location.trim()) {
-    return showToast('error', 'Fields Required', 'Please complete all fields to save your plan.')
-  }
-
-  try {
-    showLoader()
-
-    await saveWeddingPlan(user?.uid!, {
-      planName: planName.trim(),
-      coupleName: coupleName.trim(),
-      weddingDate: weddingDate.toISOString(),
+    // Debug log to verify state
+    console.log("Saving wedding plan with details:", {
+      planName,
+      coupleName,
+      weddingDate,
       budget,
-      guests: parseInt(guests),
-      location: location.trim()
+      guests,
+      location
     })
 
-    hideLoader()
+    // Validation
+    if (!planName.trim() || !coupleName.trim() || !budget || !guests || !location.trim()) {
+      return showToast('error', 'Fields Required', 'Please complete all fields to save your plan.')
+    }
 
-    showToast('success', 'Perfect! 🎉', 'Your wedding plan has been created 💕')
+    try {
+      showLoader()
 
-    setTimeout(() => {
-      router.replace('/(dashboard)/home')
-    }, 500)
+      await saveWeddingPlan(user?.uid!, {
+        planName: planName.trim(),
+        coupleName: coupleName.trim(),
+        weddingDate: weddingDate.toISOString(),
+        budget,
+        guests: parseInt(guests),
+        location: location.trim()
+      })
 
-  } catch (err: any) {
-    console.error("Save Error:", err)
-    hideLoader()
-    showToast('error', 'Error', "Failed to save details. Please check your connection.")
+      hideLoader()
+
+      showToast('success', 'Perfect! 🎉', 'Your wedding plan has been created 💕')
+
+      setTimeout(() => {
+        router.replace('/(dashboard)/home')
+      }, 500)
+
+    } catch (err: any) {
+      console.error("Save Error:", err)
+      hideLoader()
+      showToast('error', 'Error', "Failed to save details. Please check your connection.")
+    }
   }
-}
+
   const handleBudgetSelect = (value: string) => {
     setBudget(value)
     setShowBudgetModal(false)
@@ -213,11 +217,11 @@ export default function WeddingDetails() {
             />
 
             {/* Using SelectInput for Budget */}
-            <BudgetModal
-              visible={showBudgetModal}
-              selectedBudget={budget}
-              onSelect={handleBudgetSelect}
-              onClose={() => setShowBudgetModal(false)}
+            <SelectInput
+              label="Budget Range"
+              value={budget || 'Select your budget'}
+              onPress={() => setShowBudgetModal(true)}
+              icon="wallet-outline"
             />
 
             <FormInput
@@ -265,7 +269,7 @@ export default function WeddingDetails() {
         )}
       </ScrollView>
 
-      {/* Budget Modal */}
+      {/* Budget Modal - Properly Integrated */}
       <BudgetModal
         visible={showBudgetModal}
         selectedBudget={budget}
@@ -423,15 +427,6 @@ const DecorativeBottom = () => (
     </View>
   </View>
 )
-
-interface BudgetModalProps {
-  visible: boolean
-  selectedBudget: string
-  onSelect: (value: string) => void
-  onClose: () => void
-}
-
-
 
 const CornerDecorations = () => (
   <>

@@ -2,10 +2,10 @@ import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { db } from './firebaseConfig'
 import { WeddingPlan } from '@/types/weddingdetails'
 
+// Save or Update Plan
 export const saveWeddingPlan = async (userId: string, data: Partial<WeddingPlan>) => {
   try {
     const planRef = doc(db, 'wedding_plans', userId)
-    
     const docSnap = await getDoc(planRef)
     
     const weddingData: WeddingPlan = {
@@ -14,11 +14,11 @@ export const saveWeddingPlan = async (userId: string, data: Partial<WeddingPlan>
       coupleName: data.coupleName || '',
       weddingDate: data.weddingDate || new Date().toISOString(),
       budget: data.budget || '',
-      guests: data.guests || 0,
+      guests: Number(data.guests) || 0, 
       location: data.location || '',
-      isSetupComplete: true,
+      isSetupComplete: true, 
       updatedAt: new Date().toISOString(),
-      ...(docSnap.exists() ? {} : { createdAt: new Date().toISOString() }) // අලුත් එකක් නම් createdAt දාන්න
+      ...(docSnap.exists() ? {} : { createdAt: new Date().toISOString() })
     }
 
     await setDoc(planRef, weddingData, { merge: true })
@@ -29,6 +29,7 @@ export const saveWeddingPlan = async (userId: string, data: Partial<WeddingPlan>
   }
 }
 
+// Get Plan
 export const getWeddingPlan = async (userId: string): Promise<WeddingPlan | null> => {
   try {
     const docRef = doc(db, 'wedding_plans', userId)

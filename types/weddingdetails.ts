@@ -4,7 +4,7 @@ export interface WeddingPlan {
   coupleName: string
   weddingDate: string
   budget: string
-  guests: number
+  guests: number 
   location: string
   isSetupComplete: boolean
   updatedAt: string
