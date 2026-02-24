@@ -20,7 +20,6 @@ export const AuthContext = createContext<AuthContextType>({
 })
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  // 1. Loader එක undefined වුවහොත් ක්‍රෑෂ් වීම වැළැක්වීමට fallback එකක් යෙදීම
   const loaderContext = useLoader()
   const showLoader = loaderContext?.showLoader || (() => console.warn("showLoader not found"))
   const hideLoader = loaderContext?.hideLoader || (() => console.warn("hideLoader not found"))
@@ -30,7 +29,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isSetupComplete, setIsSetupComplete] = useState<boolean | null>(null)
 
   useEffect(() => {
-    // 2. Firebase auth හෝ db නිවැරදිව ආවේ නැත්නම් ක්‍රෑෂ් වීම වැළැක්වීම
     if (!auth || !db) {
       console.error("Firebase auth or db is not initialized properly in firebaseConfig!")
       setLoading(false)
@@ -60,7 +58,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setLoading(false)
     })
 
-    // unscribe යන්න unsubscribe ලෙස නිවැරදි කර ඇත
     return () => unsubscribe()
   }, [])
 
