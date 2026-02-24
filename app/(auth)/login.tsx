@@ -81,24 +81,24 @@ export default function Login() {
     }
 
     try {
-      await login(email, password)
-      await checkUserSetup()
+      showLoader() 
+      
+      const userCred = await login(email, password)
+      const uid = userCred.user.uid
+      
+      const docRef = doc(db, 'wedding_plans', uid)
+      const docSnap = await getDoc(docRef)
+
+      if (docSnap.exists() && docSnap.data().isSetupComplete) {
+        router.replace('/(dashboard)/home') 
+      } else {
+        router.replace('/(auth)/weddingdetails') 
+      }
+      
     } catch (err: any) {
       showToast('error', 'Login Error', err.message)
-    }
-  }
-
-  const checkUserSetup = async () => {
-    const currentUser = auth.currentUser
-    if (!currentUser) return
-
-    const docRef = doc(db, 'wedding_plans', currentUser.uid)
-    const docSnap = await getDoc(docRef)
-
-    if (docSnap.exists()) {
-      router.replace('/(dashboard)/home')
-    } else {
-      router.replace('/(auth)/weddingdetails')
+    } finally {
+      hideLoader()
     }
   }
 

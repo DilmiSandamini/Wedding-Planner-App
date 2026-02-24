@@ -108,7 +108,7 @@ export default function Register() {
     try {
       await registerUser(fullName.trim(), email.trim(), password)
       showToast('success', 'Account Created', 'Welcome to your journey!')
-      router.replace('/(auth)/login')
+      router.replace('/(auth)/weddingdetails')
     } catch (err: any) {
       showToast('error', 'Register Error', err.message)
     }

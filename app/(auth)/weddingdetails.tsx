@@ -12,6 +12,8 @@ import { showToast } from '@/utils/notifications'
 import { saveWeddingPlan } from '@/services/weddingdetails'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { Ionicons } from '@expo/vector-icons'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '@/services/firebaseConfig'
 
 // Reusable Components
 import FormInput from '@/components/FormInput'
@@ -40,9 +42,22 @@ export default function WeddingDetails() {
   const heartBeat = useRef(new Animated.Value(1)).current
   const sparkleRotate = useRef(new Animated.Value(0)).current
 
-  useEffect(() => {
-    startAnimations()
-  }, [])
+
+useEffect(() => {
+  const verifySetup = async () => {
+    if (user) {
+      const docRef = doc(db, 'wedding_plans', user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists() && docSnap.data().isSetupComplete) {
+        router.replace('/(dashboard)/home');
+      }
+    }
+  };
+
+  verifySetup();
+  startAnimations();
+}, [user]);
 
   const startAnimations = () => {
     // Entrance animation

@@ -2,7 +2,6 @@ import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { db } from './firebaseConfig'
 import { WeddingPlan } from '@/types/weddingdetails'
 
-// Save or Update Plan
 export const saveWeddingPlan = async (userId: string, data: Partial<WeddingPlan>) => {
   try {
     const planRef = doc(db, 'wedding_plans', userId)

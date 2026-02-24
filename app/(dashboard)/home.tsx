@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react'
 import { View, Text, ScrollView, TouchableOpacity, SafeAreaView, Animated, Image, Alert, Dimensions } from 'react-native'
 import { useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { useAuth } from '@/hooks/useAuth'
 import { useLoader } from '@/hooks/useLoader'
 import { showToast } from '@/utils/notifications'
 import { db } from '@/services/firebaseConfig'
@@ -15,6 +14,8 @@ import DashboardCard from '@/components/dashboard/DashboardCard'
 import SectionHeader from '@/components/dashboard/SectionHeader'
 import ProfileMenu from '@/components/dashboard/ProfileMenu'
 import EditWeddingModal from '@/components/dashboard/EditWeddingModal'
+import { AuthContext } from '@/context/AuthContext'
+import { useAuth } from '@/hooks/useAuth'
 
 export default function HomeScreen() {
   const router = useRouter()
@@ -106,7 +107,12 @@ export default function HomeScreen() {
   const handleLogout = () => {
     Alert.alert('Logout', 'Are you sure?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Logout', style: 'destructive', onPress: async () => { setShowProfileMenu(false); await logout(); router.replace('/(auth)/login'); } }
+      { text: 'Logout', style: 'destructive', onPress: async () => { 
+          setShowProfileMenu(false); 
+          await logout(); 
+          router.replace('/(auth)/login'); 
+        } 
+      }
     ])
   }
 
