@@ -96,17 +96,3 @@ npx expo start
 
 ---
 
-## 📸 Application Screenshots
-
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.09.jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.11 (1).jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.11 (2).jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.11.jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.12 (1).jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.12 (2).jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.12.jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.13 (1).jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.13 (2).jpeg)
-![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.13.jpeg)
-
-
