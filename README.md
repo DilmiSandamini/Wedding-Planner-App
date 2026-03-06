@@ -1,50 +1,112 @@
-# Welcome to your Expo app 👋
+# 💍 Comprehensive Wedding Planner – Mobile Application
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern **couple-based wedding planning mobile app** that helps partners organize their dream wedding together.
+The app allows couples to manage **tasks, guests, budgets, and wedding details** while tracking the countdown to their special day.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Features
 
-   ```bash
-   npm install
-   ```
+* 👩‍❤️‍👨 **Couple-Based Planning**
 
-2. Start the app
+  * Both partners can collaborate on a single wedding plan.
 
-   ```bash
-   npx expo start
-   ```
+* ⏳ **Wedding Countdown**
 
-In the output, you'll find options to open the app in a
+  * Real-time countdown timer to the wedding day.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+* 👥 **Guest Management**
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+  * Add and manage guest lists easily.
 
-## Get a fresh project
+* 💰 **Budget Planning**
 
-When you're ready, run:
+  * Track and manage wedding expenses.
+
+* 📋 **Task & Event Organization**
+
+  * Organize important wedding tasks.
+
+* 🔐 **Secure Authentication**
+
+  * Email/password and Google authentication using Firebase.
+
+* 🎨 **Modern UI**
+
+  * Elegant responsive interface with smooth animations.
+
+---
+
+## 🛠 Technologies Used
+
+* **React Native (Expo)**
+* **Firebase Authentication**
+* **Firebase Firestore**
+* **Google Authentication**
+* **Context API**
+* **Expo Router**
+* **React Native Animations**
+
+---
+
+## 📱 Application Flow
+
+1. User registers or logs in.
+2. Couple creates a wedding plan.
+3. Enter details such as:
+
+   * Couple name
+   * Wedding date
+   * Budget
+   * Guest count
+   * Location
+4. The system saves the plan in **Firebase Firestore**.
+5. Users can manage and track their wedding preparations.
+
+---
+
+## 🚀 Installation
+
+Clone the repository:
 
 ```bash
-npm run reset-project
+git clone https://github.com/DilmiSandamini/Wedding-Planner-App.git
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Install dependencies:
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Run the project:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start
+```
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 📌 Future Improvements
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+* Vendor management system
+* Invitation management
+* Photo & memory gallery
+* Wedding checklist automation
+
+---
+
+## 📸 Application Screenshots
+
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.09.jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.11 (1).jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.11 (2).jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.11.jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.12 (1).jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.12 (2).jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.12.jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.13 (1).jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.13 (2).jpeg)
+![](assets/screenshoot/WhatsApp Image 2026-03-07 at 01.52.13.jpeg)
+
+
