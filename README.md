@@ -96,3 +96,6 @@ npx expo start
 
 ---
 
+## 📸 Application Screenshots
+
+assets/screenshoot/......
